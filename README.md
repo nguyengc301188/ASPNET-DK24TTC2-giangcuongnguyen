@@ -1,3 +1,3 @@
 # ASPNET-DK24TTC2-giangcuongnguyen
 Chuyên đề ASP.NET
-Đề tài 
+Đề tài 18 Quản lý sân bóng đá mini.
