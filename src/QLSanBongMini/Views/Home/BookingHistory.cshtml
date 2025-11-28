@@ -1,0 +1,47 @@
+﻿@model IEnumerable<QLSanBongMini.Models.Booking>
+
+<h2>Lịch sử đặt sân</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Sân</th>
+        <th>Ngày</th>
+        <th>Bắt đầu</th>
+        <th>Kết thúc</th>
+        <th>Giá</th>
+        <th>Thanh toán</th>
+        <th>Trạng thái</th>
+        <th></th>
+    </tr>
+
+    @foreach (var b in Model)
+    {
+        <tr>
+            <td>@b.Field.FieldName</td>
+            <td>@b.BookingDate.ToString("dd/MM/yyyy")</td>
+            <td>@b.StartTime.ToString("HH:mm")</td>
+            <td>@b.EndTime.ToString("HH:mm")</td>
+            <td>@b.TotalPrice.ToString("N0") đ</td>
+
+            <td>
+                @(b.IsPaid ? "Đã thanh toán" : "Chưa thanh toán")
+            </td>
+
+            <td>
+                @(
+                b.Status == 0 ? "Chờ duyệt" :
+                b.Status == 1 ? "Đã duyệt" :
+                "Đã hủy"
+            )
+            </td>
+
+            <td>
+                @if (b.Status == 0)
+                {
+                    <a href="@Url.Action("CancelBooking", "Home", new { id = b.BookingID })"
+                       class="btn btn-danger btn-sm">Hủy</a>
+                }
+            </td>
+        </tr>
+    }
+</table>

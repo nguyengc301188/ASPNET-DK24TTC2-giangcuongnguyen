@@ -1,0 +1,37 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Quản lý chung";
+    ViewBag.Active = "Index";
+}
+@model QLSanBongMini.Models.ViewModels.DashboardViewModel
+
+<h2>Dashboard Admin</h2>
+
+<div style="display:flex; gap:20px; margin-top:20px; flex-wrap:wrap;">
+    <!-- Tổng số sân -->
+    <div style="padding:20px; background:#4CAF50; color:white; border-radius:10px; width:200px; text-align:center;">
+        <h3>@Model.TotalFields</h3>
+        <p>Số sân bóng</p>
+        <a href="@Url.Action("Fields", "Admin")" class="btn btn-light btn-sm">Quản lý sân</a>
+    </div>
+
+    <!-- Tổng booking -->
+    <div style="padding:20px; background:#2196F3; color:white; border-radius:10px; width:200px; text-align:center;">
+        <h3>@Model.TotalBookings</h3>
+        <p>Lịch đặt</p>
+        <a href="@Url.Action("Bookings", "Admin")" class="btn btn-light btn-sm">Quản lý booking</a>
+    </div>
+
+    <!-- Tổng users -->
+    <div style="padding:20px; background:#FF9800; color:white; border-radius:10px; width:200px; text-align:center;">
+        <h3>@Model.TotalUsers</h3>
+        <p>Người dùng</p>
+        <a href="@Url.Action("Users", "Admin")" class="btn btn-light btn-sm">Quản lý user</a>
+    </div>
+
+    <!-- Doanh thu -->
+    <div style="padding:20px; background:#E91E63; color:white; border-radius:10px; width:200px; text-align:center;">
+        <h3>@Model.TotalRevenue.ToString("N0") đ</h3>
+        <p>Doanh thu</p>
+    </div>
+</div>

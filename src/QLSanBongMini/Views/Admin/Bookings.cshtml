@@ -1,0 +1,73 @@
+﻿@model IEnumerable<QLSanBongMini.Models.ViewModels.BookingViewModel>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Quản lý Booking";
+    ViewBag.Active = "Bookings";
+}
+
+<h2>Quản lý Booking</h2>
+
+@if (TempData["PaidSuccess"] != null)
+{
+    <div class="alert alert-success">@TempData["PaidSuccess"]</div>
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Người đặt</th>
+            <th>Sân bóng</th>
+            <th>Ngày đặt</th>
+            <th>Giờ bắt đầu</th>
+            <th>Giờ kết thúc</th>
+            <th>Trạng thái</th>
+            <th>Thanh toán</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var b in Model)
+        {
+            <tr>
+                <td>@b.UserFullName</td>
+                <td>@b.FieldName</td>
+                <td>@b.BookingDate.ToString("dd/MM/yyyy")</td>
+                <td>@b.StartTime.ToString(@"hh\:mm")</td>
+                <td>@b.EndTime.ToString(@"hh\:mm")</td>
+                <td>
+                    @(b.Status == 0 ? "Chờ duyệt" : (b.Status == 1 ? "Đã duyệt" : "Đã hủy"))
+                </td>
+                <td>
+                    @if (b.Status != 1)
+                    {
+                        <span>Chưa thanh toán</span>
+                    }
+                    else
+                    {
+                        if (b.IsPaid)
+                        {
+                            <span>Đã thanh toán @b.AmountPaid đ</span>
+                        }
+                        else
+                        {
+                            <a class="btn btn-sm btn-primary" href="@Url.Action("MarkPaid", "Admin", new { bookingId = b.BookingID })">
+                                Chưa thanh toán
+                            </a>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (b.Status == 0)
+                    {
+                        <a class="btn btn-sm btn-success" href="@Url.Action("AcceptBooking", "Admin", new { id = b.BookingID })">Duyệt</a>
+                        <a class="btn btn-sm btn-danger" href="@Url.Action("CancelBooking", "Admin", new { id = b.BookingID })">Hủy</a>
+                    }
+                    else if (b.Status == 1)
+                    {
+                        <span class="badge bg-success">Đã duyệt</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

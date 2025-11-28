@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Đăng nhập</title>
+</head>
+<body>
+    <h2>Đăng nhập hệ thống</h2>
+
+    <form method="post">
+        <label>Số điện thoại</label>
+        <input type="text" name="phone" required />
+
+        <br />
+
+        <label>Mật khẩu</label>
+        <input type="password" name="password" required />
+
+        <br />
+
+        <button type="submit">Đăng nhập</button>
+
+        <span style="color:red">@ViewBag.Error</span>
+    </form>
+</body>
+</html>

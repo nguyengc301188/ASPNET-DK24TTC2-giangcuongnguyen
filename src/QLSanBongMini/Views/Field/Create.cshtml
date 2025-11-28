@@ -1,0 +1,50 @@
+﻿@model QLSanBongMini.Models.Field
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Thêm sân mới";
+}
+
+<h2>Thêm sân mới</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+@using (Html.BeginForm("CreateField", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.FieldName)
+        @Html.TextBoxFor(m => m.FieldName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.FieldName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address)
+        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Type)
+        @Html.TextBoxFor(m => m.Type, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Type, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PricePerHour)
+        @Html.TextBoxFor(m => m.PricePerHour, new { @class = "form-control", type = "number", step = "0.01", min = "0" })
+        @Html.ValidationMessageFor(m => m.PricePerHour, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ImageURL, "URL hình ảnh")
+        @Html.TextBoxFor(m => m.ImageURL, new { @class = "form-control", placeholder = "https://..." })
+    </div>
+
+    <button type="submit" class="btn btn-success">Thêm sân</button>
+    <a href="@Url.Action("Fields", "Admin")" class="btn btn-secondary">Hủy</a>
+}

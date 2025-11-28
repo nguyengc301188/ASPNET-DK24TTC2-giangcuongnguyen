@@ -1,0 +1,60 @@
+﻿@model QLSanBongMini.Models.Field
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Sửa sân";
+    ViewBag.Active = "Fields";
+}
+
+<h2>Sửa thông tin sân</h2>
+
+@using (Html.BeginForm("EditField", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.FieldID)
+
+
+    <div class="form-group mb-3">
+        @Html.LabelFor(m => m.FieldName, "Tên sân")
+        @Html.TextBoxFor(m => m.FieldName, new { @class = "form-control", placeholder = "Nhập tên sân" })
+    </div>
+
+    <div class="form-group mb-3">
+        @Html.LabelFor(m => m.Address, "Địa chỉ")
+        @Html.TextBoxFor(m => m.Address, new { @class = "form-control", placeholder = "Nhập địa chỉ sân" })
+    </div>
+
+    <div class="form-group mb-3">
+        @Html.LabelFor(m => m.Type, "Loại sân")
+        @Html.TextBoxFor(m => m.Type, new { @class = "form-control", placeholder = "Ví dụ: Sân cỏ nhân tạo 5 người" })
+    </div>
+
+    <div class="form-group mb-3">
+        @Html.LabelFor(m => m.PricePerHour, "Giá mỗi giờ")
+        @Html.TextBoxFor(m => m.PricePerHour, new { @class = "form-control", placeholder = "Nhập giá/giờ", type = "number", step = "0.01", min = "0" })
+    </div>
+
+    <div class="form-group mb-3">
+        @Html.LabelFor(m => m.Description, "Mô tả")
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = 3, placeholder = "Mô tả chi tiết về sân..." })
+    </div>
+
+    <div class="form-group mb-3">
+        @Html.LabelFor(m => m.ImageURL, "URL hình ảnh")
+        @Html.TextBoxFor(m => m.ImageURL, new { @class = "form-control", placeholder = "https://..." })
+        @if (!string.IsNullOrEmpty(Model.ImageURL))
+        {
+            <p>Hình hiện tại: <img src="@Model.ImageURL" alt="Hình sân" width="150" /></p>
+        }
+    </div>
+
+    <div class="form-check mb-3">
+        @Html.CheckBoxFor(m => m.Status, new { @class = "form-check-input" })
+        @Html.LabelFor(m => m.Status, "Hiển thị sân", new { @class = "form-check-label" })
+    </div>
+
+    <button type="submit" class="btn btn-success">Lưu thay đổi</button>
+    <a href="@Url.Action("Fields", "Admin")" class="btn btn-secondary">Hủy</a>
+
+
+}

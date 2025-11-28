@@ -1,0 +1,18 @@
+﻿
+<h2>Chào mừng đến với hệ thống đặt sân bóng mini</h2>
+
+<div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:20px;">
+    @foreach (var field in Model)
+    {
+        <div class="card" style="width: 300px;">
+            <img src="@field.ImageURL" class="card-img-top" style="height:180px; object-fit:cover;" alt="@field.FieldName">
+            <div class="card-body">
+                <h5 class="card-title">@field.FieldName</h5>
+                <p class="card-text">@field.Address</p>
+                <p>Giá: @field.PricePerHour.ToString("N0") đ/giờ</p>
+                <a href="@Url.Action("ViewField", "Home", new { id = field.FieldID })" class="btn btn-primary">Xem & Đặt sân</a>
+            </div>
+        </div>
+    }
+
+</div>

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<QLSanBongMini.Models.Field>
+
+<h2>Danh sách sân bóng</h2>
+
+<a href="/Field/Create" class="btn btn-success">+ Thêm sân</a>
+
+<table class="table table-bordered" style="margin-top:20px;">
+    <tr>
+        <th>ID</th>
+        <th>Tên sân</th>
+        <th>Giá / giờ</th>
+        <th>Mô tả</th>
+        <th>Ảnh</th>
+        <th>Chức năng</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.FieldID</td>
+            <td>@item.FieldName</td>
+            <td>@item.PricePerHour</td>
+            <td>@item.Description</td>
+            <td>
+                @if (item.ImageURL != null)
+                {
+                    <img src="@item.ImageURL" width="100" />
+                }
+            </td>
+            <td>
+                <a href="/Field/Edit/@item.FieldID" class="btn btn-primary">Sửa</a>
+                <a href="/Field/Delete/@item.FieldID" class="btn btn-danger"
+                   onclick="return confirm('Xóa sân này?');">Xóa</a>
+            </td>
+        </tr>
+    }
+</table>

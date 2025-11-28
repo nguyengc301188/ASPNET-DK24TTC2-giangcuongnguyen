@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Admin Panel - QLSânBóngMini</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background: #f4f6f9;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: #343a40;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+        }
+
+            .sidebar a {
+                color: white;
+                padding: 12px 20px;
+                display: block;
+                font-size: 16px;
+                text-decoration: none;
+            }
+
+                .sidebar a:hover {
+                    background: #495057;
+                    text-decoration: none;
+                }
+
+            .sidebar .active {
+                background: #17a2b8;
+            }
+
+        /* Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 30px;
+        }
+
+        /* Header */
+        .admin-header {
+            background: #ffffff;
+            padding: 15px 25px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h3 class="text-center">
+            <i class="fas fa-tools"></i> ADMIN
+        </h3>
+        <hr style="border-color: #777" />
+
+        <a href="@Url.Action("Index","Admin")" class="@(ViewBag.Active == "Dashboard" ? "active" : "")">
+            <i class="fas fa-chart-line"></i> Dashboard
+        </a>
+
+        <a href="@Url.Action("Fields","Admin")" class="@(ViewBag.Active == "Fields" ? "active" : "")">
+            <i class="fas fa-futbol"></i> Quản lý sân
+        </a>
+
+        <a href="@Url.Action("Users","Admin")" class="@(ViewBag.Active == "Users" ? "active" : "")">
+            <i class="fas fa-users"></i> Quản lý người dùng
+        </a>
+
+        <a href="@Url.Action("Bookings","Admin")" class="@(ViewBag.Active == "Bookings" ? "active" : "")">
+            <i class="fas fa-calendar-check"></i> Quản lý booking
+        </a>
+
+        <a href="@Url.Action("Logout","AuthClient")">
+            <i class="fas fa-sign-out-alt"></i> Đăng xuất
+        </a>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="main-content">
+
+        <!-- HEADER -->
+        <div class="admin-header">
+            <h4>@ViewBag.Title</h4>
+            <span>Xin chào, @(Session["FullName"] ?? "Admin")</span>
+        </div>
+
+        <br />
+
+        @RenderBody()
+    </div>
+
+</body>
+</html>

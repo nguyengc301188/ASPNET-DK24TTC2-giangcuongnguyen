@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Quản lý sân";
+    ViewBag.Active = "Fields";
+}
+@model IEnumerable<QLSanBongMini.Models.Field>
+
+<h2>Quản lý sân</h2>
+<p><a href="@Url.Action("CreateField")" class="btn btn-primary">Thêm sân mới</a></p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Tên</th>
+            <th>Địa chỉ</th>
+            <th>Loại</th>
+            <th>Giá/giờ</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="@(item.Status ? "" : "table-warning")">
+                <td>@item.FieldName</td>
+                <td>@item.Address</td>
+                <td>@item.Type</td>
+                <td>@item.PricePerHour.ToString("N0")</td>
+                <td>@(item.Status ? "Hoạt động" : "Đã ẩn")</td>
+                <td>
+                    @if (item.Status)
+                    {
+                        <a class="btn btn-warning btn-sm" href="@Url.Action("EditField", new { id = item.FieldID })">Sửa</a>
+                        <a class="btn btn-danger btn-sm" href="@Url.Action("DeleteField", new { id = item.FieldID })"
+                           onclick="return confirm('Bạn có chắc muốn ẩn sân này?');">Ẩn</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-success btn-sm" href="@Url.Action("RestoreField", new { id = item.FieldID })">Mở lại</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
